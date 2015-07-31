@@ -1,0 +1,10 @@
+{
+"name": "openload",
+"hostprefix": "openload.io",
+"displayname": "openload.io",
+"version": "0.1",
+"authentication": "no",
+"module": "host.php",
+"class": "SynoFileHostingOpenload",
+"description": "Premium account not supported."
+}
