@@ -1,7 +1,7 @@
 <?php
 // Code adapted from biteme post http://forum.synology.com/enu/viewtopic.php?f=10&t=41181&start=30
 
-define('DEBUG_TO_FILE', false);
+define('DEBUG_TO_FILE', true);
 define("DEBUG_FILE", "/tmp/openload.log");
 
 class SynoFileHostingOpenload {   
@@ -9,7 +9,7 @@ private $Url;
 private $Username;
 private $Password;
 private $HostInfo;
-private $OPENLOAD_API_URL = 'https://api.openload.io/1/';
+private $OPENLOAD_API_URL = 'https://api.openload.co/1/';
 
 public function __construct($Url, $Username, $Password, $HostInfo) {
 	$this->Url = $Url;
@@ -41,7 +41,7 @@ public function GetDownloadInfo() {
 	$DownloadInfo = array(); // result
 	$this->debug("Start: ", $this->Url);
 
-	preg_match('/openload.io\/f\/(.+)\//', $this->Url, $matches);
+	preg_match('/openload.co\/f\/(.+)\//', $this->Url, $matches);
 
 	if(empty($matches[1])) {
 		$DownloadInfo[DOWNLOAD_ERROR] = ERR_NOT_SUPPORT_TYPE;
@@ -55,6 +55,8 @@ public function GetDownloadInfo() {
 	if($TicketData->status != 200) {
 		if ($TicketData->status == 404) {
 			$DownloadInfo[DOWNLOAD_ERROR] = ERR_FILE_NO_EXIST;
+		} else if ($TicketData->status == 509){
+			$DownloadInfo[DOWNLOAD_ERROR] = ERR_TRY_IT_LATER;
 		} else {
 			$DownloadInfo[DOWNLOAD_ERROR] = ERR_UNKNOWN;
 		}

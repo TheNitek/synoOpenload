@@ -1,8 +1,8 @@
 {
 "name": "openload",
-"hostprefix": "openload.io",
-"displayname": "openload.io",
-"version": "0.1",
+"hostprefix": "openload.co",
+"displayname": "openload.co",
+"version": "0.2",
 "authentication": "no",
 "module": "host.php",
 "class": "SynoFileHostingOpenload",
